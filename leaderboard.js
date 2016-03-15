@@ -11,19 +11,19 @@ var leaderBoardModule = (function() {
     fs.readFile(fileJson, function readSuccess(err, data){
       if(err) return console.error(err);
       var index = Object.keys(data).indexOf(playerName);
-      // var dataStr = data.toString();
-      // var player = dataStr.indexOf(playerName);
       //TODO: write into that line
       if (index >= 0){
         // exists, update the score
-        data[Object.keys(data)[index]] = highScore;
+        console.log(playerName + "is updated!");
+        list[Object.keys(data)[index]] = highScore;
       } else {
         // append the new player and the score
-        data.playerName = highScore;
+        list[playerName] = highScore;
       }
-      list = data;
-      jsonfile.writeFile('fileJson', list, function(err){
-        console.log(err);
+      // list = data;
+      jsonfile.writeFile(fileJson, list, function(err){
+        if(err) console.log(err);
+        console.log('writen!');
       })
     });   
   }
@@ -32,13 +32,15 @@ var leaderBoardModule = (function() {
     // read the file and display
     fs.readFile(fileJson, function displaySuccess(err, data){
       if(err) return console.error(err);
-      var displayLdb = data.toString();
-      console.log(displayLdb);
+      var display = data.toString();
+      console.log(display);
+      // var displayLdb = JSON.stringify(data);
+      // console.log(displayLdb);
     });
   }
 
   function init() {
-    _displayLeaderBoard();
+    //_displayLeaderBoard();
   }
 
   init();

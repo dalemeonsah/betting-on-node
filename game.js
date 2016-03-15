@@ -6,13 +6,13 @@ var prompt = require('prompt-sync')();
 //npm color
 var colors = require('colors');
 var name = prompt("Please enter your name: ", "");
-var bankroll = 10;
-var highestScore = 100;
+var bankroll = 50;
+var highestScore = 50;
 do {
   // Bet is between 5 and 10
-  var bet = prompt("Place your bet between 5 and 10: ","");
+  var bet = +(prompt("Place your bet between 5 and 10: ",""));
   if(bet > 4 && bet < 11){
-    var guess = prompt("Guess random number between 1 and 10: ","");
+    var guess = +(prompt("Guess random number between 1 and 10: ",""));
     if (guess > 0 && guess < 11){
       var game = Math.floor((Math.random() * 10) + 1);
       if (guess == game){

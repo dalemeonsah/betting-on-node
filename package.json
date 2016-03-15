@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/dalemeonsah/betting-on-node",
   "dependencies": {
-    "csv": "^0.4.6",
     "jsonfile": "^2.2.3",
     "prompt-sync": "^4.0.4"
   }
