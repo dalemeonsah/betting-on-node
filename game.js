@@ -1,10 +1,13 @@
+var leaderboard = require('./leaderboard.js');
+
 //npm prompt-sync
 var prompt = require('prompt-sync')();
 
 //npm color
 var colors = require('colors');
-
-var bankroll = 100;
+var name = prompt("Please enter your name: ", "");
+var bankroll = 10;
+var highestScore = 100;
 do {
   // Bet is between 5 and 10
   var bet = prompt("Place your bet between 5 and 10: ","");
@@ -12,11 +15,15 @@ do {
     var guess = prompt("Guess random number between 1 and 10: ","");
     if (guess > 0 && guess < 11){
       var game = Math.floor((Math.random() * 10) + 1);
-      if (guess === game){
+      if (guess == game){
         bankroll += bet;
         console.log(colors.green("AWESOME now your money is: " + bankroll));
+        // highest score
+        if(bankroll > highestScore){
+          highestScore = bankroll;
+        }
       }
-      else if(Math.abs(guess - game) === 1){
+      else if(Math.abs(guess - game) == 1){
         console.log(colors.bgCyan("You dont lose any money: " + bankroll));
       }
       else {
@@ -31,5 +38,18 @@ do {
   else{
     console.log("Please only put bet between 5 and 10!");
   }
-}while (bankroll > 0);
+} while (bankroll > 0);
+
+if (bankroll <= 0) {
+  console.log("Game is ended");
+  leaderboard.update(name, highestScore);
+  leaderboard.display();
+}
+
 console.log("You are bankcrupt!");
+
+// var stats = {
+//   name: name,
+//   score: highestScore
+// }
+
